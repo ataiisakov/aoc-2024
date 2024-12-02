@@ -1,21 +1,28 @@
+import kotlin.math.abs
+
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+
+    fun part1() {
+        val (left, right) = readInput("day1").map { line ->
+            val left = line.substringBefore(" ").toInt()
+            val right = line.substringAfterLast(" ").toInt()
+            left to right
+        }.unzip()
+        val res = left.sorted().zip(right.sorted()).sumOf { (first, second) -> abs(first - second) }
+        println(res)
     }
+    fun part2() {
+        val (left, right) = readInput("day1").map { line ->
+            val left = line.substringBefore(" ").toInt()
+            val right = line.substringAfterLast(" ").toInt()
+            left to right
+        }.unzip()
+        val freq: Map<Int, Int> = right.groupingBy { it }.eachCount()
 
-    fun part2(input: List<String>): Int {
-        return input.size
+        val res = left.sumOf { it * freq.getOrDefault(it, 0)   }
+        println(res)
     }
+    part1()
+    part2()
 
-    // Test if implementation meets criteria from the description, like:
-    check(part1(listOf("test_input")) == 1)
-
-    // Or read a large test input from the `src/Day01_test.txt` file:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    // Read the input from the `src/Day01.txt` file.
-    val input = readInput("Day01")
-    part1(input).println()
-    part2(input).println()
 }
