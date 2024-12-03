@@ -6,7 +6,6 @@ fun main() {
     val dontRegex = """don't\(\)""".toRegex()
 
     fun getMultiplication(section: String): Long {
-        println(section)
         return mulRegex.findAll(section).sumOf {
             val (first, second) = it.destructured
             first.toLong() * second.toLong()
@@ -35,8 +34,8 @@ fun main() {
         }
         println(sum)
     }
-    part1()
-    part2()
+    part1() //182619815
+    part2() //80747545
 
 }
 
